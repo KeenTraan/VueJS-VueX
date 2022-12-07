@@ -1,15 +1,22 @@
 <template>
   <div class="todo">
     <NavbarComponent />
-    <h1>This is todo</h1>
+    <div class="body-todo">
+      <SearchTodoVue />
+      <ColumnComponent />
+    </div>
   </div>
 </template>
 
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import ColumnComponent from '@/components/Todo/ColumnComponent.vue'
+import SearchTodoVue from '@/components/Todo/SearchTodo.vue'
 export default {
   components: {
-    NavbarComponent
+    NavbarComponent,
+    ColumnComponent,
+    SearchTodoVue
   }
 }
 </script>
@@ -22,5 +29,9 @@ export default {
 }
 .todo {
   display: flex;
+}
+.body-todo {
+  display: flex;
+  flex-direction: column;
 }
 </style>
