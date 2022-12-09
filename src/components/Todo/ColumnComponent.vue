@@ -2,16 +2,21 @@
   <div class="column-list">
     <div v-for="column in columns" :key="column" class="column">
       <h2 class="header">{{ column.name }}</h2>
-      <AddItemVue v-show="column.status === 'new' && this.ishiden" />
+      <div class="input" v-if="column.id === 1 && ishiden">
+        <input type="text" placeholder="Nhập tên nhiệm vụ" :v-model="todo(params)"/> 
+        <button class="btn-save">Lưu</button>
+        <button class="btn-destroy" @click="ishiden = false">Hủy bỏ</button>
+      </div>
       <div class="cover" v-show="column.status === 'new'">
         <button class="btn-add" @click="ishiden = !ishiden">Thêm Mới</button>
       </div>
+      <TodoItemVue v-if="column.id === 1" />
     </div>
   </div>
 </template>
 
 <script>
-import AddItemVue from "./AddItem.vue";
+import TodoItemVue from "./components/TodoItem.vue";
 export default {
   data() {
     return {
@@ -20,11 +25,16 @@ export default {
         { id: 2, name: "Đã Hoàn Thành", status: "completed" },
         { id: 3, name: "Đã Hủy Bỏ", status: "cancel" },
       ],
-      ishiden: false,
+      ishiden: false
     };
   },
+  methods: {
+    todo(params) {
+      console.log(params);
+    }
+  },
   components: {
-    AddItemVue,
+    TodoItemVue,
   },
 };
 </script>
@@ -54,13 +64,49 @@ export default {
     cursor: pointer;
     border: none;
     border-radius: 3px;
-    width: 15vw;
+    width: 18vw;
     background-color: green;
-    padding: 6px 14px;
+    padding: 10px 14px;
     color: white;
   }
   .btn-add:hover {
     outline: 4px solid rgb(176, 232, 250, 0.6);
   }
 }
+.input {
+  background-color: white;
+  width: 18vw;
+  position: relative;
+  left: 1rem;
+  top: 1rem;
+  border-radius: 3px;
+  input {
+    width: 16vw;
+    margin: 1rem;
+    border: 1px solid rgba(65, 65, 65, 0.8);
+    border-radius: 3px;
+    padding: 5px;
+    opacity: 0.6;
+  }
+}
+.btn-destroy {
+  margin: 10px 15px 10px 0;
+  float: right;
+  background-color: red;
+  border: none;
+  padding: 4px 16px;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}
+.btn-save {
+  margin: 10px 0 10px 15px;
+  background-color: green;
+  border: none;
+  padding: 4px 16px;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}
+
 </style>

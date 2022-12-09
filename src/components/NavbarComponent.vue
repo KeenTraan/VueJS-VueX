@@ -26,11 +26,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 .nav-bar {
   height: 100vh;
   width: 15vw;
@@ -55,7 +50,7 @@ export default {
     padding: 15px;
     font-size: large;
     &.router-link-exact-active {
-      color: blue;
+      color: rgb(0, 41, 155);
     }
   }
   .router-link:hover{
