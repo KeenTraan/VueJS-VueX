@@ -2,11 +2,16 @@
   <div class="column-list">
     <div v-for="column in columns" :key="column" class="column">
       <h2 class="header">{{ column.name }}</h2>
-      <div class="input" v-if="column.id === 1 && ishiden">
-        <input type="text" placeholder="Nhập tên nhiệm vụ" :v-model="todo(params)"/> 
-        <button class="btn-save">Lưu</button>
+      <form class="input" v-if="column.id === 1 && ishiden">
+        <input
+          type="text"
+          placeholder="Nhập tên nhiệm vụ"
+          v-model="nameTask"
+        />
+        <p style="margin-left: 16px">{{ `${this.time} ${this.date}` }}</p>
+        <button class="btn-save" @click="handleSave" :disabled="this.nameTask ===''">Lưu</button>
         <button class="btn-destroy" @click="ishiden = false">Hủy bỏ</button>
-      </div>
+      </form>
       <div class="cover" v-show="column.status === 'new'">
         <button class="btn-add" @click="ishiden = !ishiden">Thêm Mới</button>
       </div>
@@ -17,24 +22,43 @@
 
 <script>
 import TodoItemVue from "./components/TodoItem.vue";
+import { v4 as idv4 } from "uuid";
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
+      ishiden: false,
+      nameTask: "",
+      date: `${new Date().getDate()}/${
+        new Date().getMonth() + 1
+      }/ ${new Date().getFullYear()}`,
+      time: `${new Date().getHours()}:${new Date().getMinutes()}`,
       columns: [
         { id: 1, name: "Mới", status: "new" },
         { id: 2, name: "Đã Hoàn Thành", status: "completed" },
         { id: 3, name: "Đã Hủy Bỏ", status: "cancel" },
       ],
-      ishiden: false
     };
-  },
-  methods: {
-    todo(params) {
-      console.log(params);
-    }
   },
   components: {
     TodoItemVue,
+  },
+  methods: {
+    handleSave(e) {
+      e.preventDefault();
+      const newTodo = {
+        id: idv4(),
+        nameTask: this.nameTask,
+        createAt: new Date(),
+        status: "",
+      }
+      this.nameTask = ""  //clear input 
+      this.ishiden = false //hiden input when completed add data
+      this.createTodo(newTodo)
+    },
+    ...mapActions({
+      createTodo: "createTodo"
+    })
   },
 };
 </script>
@@ -49,11 +73,12 @@ export default {
   width: 20vw;
   height: 85vh;
   position: relative;
-  // display: flex;
-  // flex-direction: column;
+  border-radius: 3px;
+  box-shadow: 5px 10px 8px #888888;
 }
 .header {
   background-color: white;
+  margin: 0;
 }
 .cover {
   width: 20vw;
@@ -94,8 +119,9 @@ export default {
   float: right;
   background-color: red;
   border: none;
+  width: 7rem;
   padding: 4px 16px;
-  border-radius: 2px;
+  border-radius: 3px;
   color: white;
   cursor: pointer;
 }
@@ -103,10 +129,10 @@ export default {
   margin: 10px 0 10px 15px;
   background-color: green;
   border: none;
+  width: 7rem;
   padding: 4px 16px;
-  border-radius: 2px;
+  border-radius: 3px;
   color: white;
   cursor: pointer;
 }
-
 </style>

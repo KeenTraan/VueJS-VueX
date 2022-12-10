@@ -1,8 +1,8 @@
 <template>
   <div class="todo-list">
-    <div class="todo-item" v-for="todo in getTodo" :key="todo" >
-      <p>{{todo.nameTask}}</p>
-      <p>{{todo.date}}</p>
+    <div class="todo-item" v-for="todo in getTodos" :key="todo">
+      <p>{{ todo.nameTask }}</p>
+      <p>{{ todo.createAt }}</p>
       <button>Hoàn thành</button>
       <button>Từ bỏ</button>
     </div>
@@ -10,14 +10,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "TodoItemComponent",
-  computed: {
-    getTodo() {
-     return this.$store.state.todos
-    }
-  }
-}
+  computed: mapGetters(['getTodos'])
+};
 </script>
 
 <style>

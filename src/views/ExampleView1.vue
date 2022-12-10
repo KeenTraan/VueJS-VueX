@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="example">
     <NavbarComponent />
+    <h1>Exam 1</h1>
   </div>
 </template>
 
@@ -13,4 +14,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.example{
+  display: flex;
+}
+</style>

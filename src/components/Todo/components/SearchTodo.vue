@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ"/>
+    <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" />
     <button class="btn">Tìm kiếm</button>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
     cursor: pointer;
     color: white;
   }
-  .btn:hover{
+  .btn:hover {
     outline: 3px solid rgb(129, 223, 255, 0.7);
   }
 }

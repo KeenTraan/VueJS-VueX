@@ -2,11 +2,11 @@
   <div class="nav-bar">
     <h2 class="logo">Example Basic</h2>
     <nav class="nav-list">
-      <router-link 
-      v-for="link in navLink" 
-      :key="link" 
-      :to="link.path"
-      class="router-link"
+      <router-link
+        v-for="link in navlinks"
+        :key="link"
+        :to="link.path"
+        class="router-link"
       >
         {{ link.name }}
       </router-link>
@@ -17,10 +17,15 @@
 <script>
 export default {
   name: "NavbarComponent",
-  computed: {
-    navLink() {
-      return this.$store.state.navlink;
-    },
+  data() {
+    return {
+      navlinks: [
+        { name: "Home", path: "/" },
+        { name: "Todo", path: "/todo" },
+        { name: "Bài 1", path: "/example1" },
+        { name: "Bài 2", path: "/example2" },
+      ],
+    };
   },
 };
 </script>
@@ -29,7 +34,7 @@ export default {
 .nav-bar {
   height: 100vh;
   width: 15vw;
-  background-color: #dcdcdc ;
+  background-color: #dcdcdc;
   margin-right: 5rem;
   position: relative;
   .logo {
@@ -53,9 +58,8 @@ export default {
       color: rgb(0, 41, 155);
     }
   }
-  .router-link:hover{
+  .router-link:hover {
     background-color: lightblue;
   }
 }
-
 </style>
