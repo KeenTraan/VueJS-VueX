@@ -11,7 +11,7 @@
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import ColumnComponent from '@/components/Todo/ColumnComponent.vue'
-import SearchTodoVue from '@/components/Todo/components/SearchTodo.vue'
+import SearchTodoVue from '@/components/Todo/SearchTodo.vue'
 export default {
   components: {
     NavbarComponent,
