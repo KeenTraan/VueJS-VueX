@@ -60,6 +60,7 @@ export default {
   }
   .router-link:hover {
     background-color: lightblue;
+    transition: 0.6s;
   }
 }
 </style>

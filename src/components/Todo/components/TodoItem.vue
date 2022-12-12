@@ -1,23 +1,35 @@
 <template>
-  <div class="todo-list">
-    <div class="todo-item" v-for="todo in getTodos" :key="todo">
-      <h4 style="margin-left: 20px;">{{ todo.nameTask }}</h4>
-      <p style="margin-left: 20px;">{{ todo.createAt }}</p>
-      <button class="btn-completed">Hoàn thành</button>
-      <button class="btn-cancel">Từ bỏ</button>
+  <div class="scroll-list-item">
+    <div class="todo-list">
+      <div class="todo-item" v-for="todo in getTodos" :key="todo">
+        <h4 style="margin-left: 20px;">{{ todo.nameTask }}</h4>
+        <p style="margin-left: 20px;">{{ todo.createAt }}</p>
+        <!-- <p style="margin-left: 20px;">{{ todo.status }}</p> -->
+        <button class="btn-completed" @click="handleCompleted">Hoàn thành</button>
+        <button class="btn-cancel">Từ bỏ</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: "TodoItemComponent",
+  methods: {
+    handleCompleted() {
+      const a = [...this.getTodos]
+      console.log(a);
+    },
+  ...mapActions({
+    updateStatus: "updateStatus"
+  })
+  },
   computed: mapGetters(['getTodos'])
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .todo-item {
   background-color: white;
   margin: 5px 10px 0 11px;
@@ -41,5 +53,23 @@ export default {
   color: white;
   cursor: pointer;
   width: 6rem;
+}
+.scroll-list-item {
+  overflow: auto;
+  height: 55vh;
+  position: relative;
+  top: 20px;
+} 
+.scroll-list-item::-webkit-scrollbar {
+  width: 3px;
+  height: 10rem;
+}
+.scroll-list-item::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 100rem;
+}
+.scroll-list-item::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 100rem;
 }
 </style>

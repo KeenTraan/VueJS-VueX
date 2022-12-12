@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import modules from "./modules";
+import modulesTodo from "./modulesTodo";
 export default createStore({
   state: {
     // navlinks: [
@@ -39,6 +39,6 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    modules,
+    modulesTodo,
   },
 });

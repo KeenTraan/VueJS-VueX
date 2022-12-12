@@ -3,29 +3,33 @@
     <div v-for="column in columns" :key="column" class="column">
       <h2 class="header">{{ column.name }}</h2>
       <form class="input" v-if="column.id === 1 && ishiden">
-        <input
-          type="text"
-          placeholder="Nhập tên nhiệm vụ"
-          v-model="nameTask"
-        />
+        <input type="text" placeholder="Nhập tên nhiệm vụ" v-model="nameTask" />
         <p style="margin-left: 20px">{{ `${this.time} ${this.date}` }}</p>
-        <button class="btn-save" @click="handleSave" :disabled="this.nameTask ===''">Lưu</button>
+        <button
+          class="btn-save"
+          @click="handleSave"
+          :disabled="this.nameTask === ''"
+        >
+          Lưu
+        </button>
         <button class="btn-destroy" @click="ishiden = false">Hủy bỏ</button>
       </form>
       <div class="cover" v-show="column.status === 'new'">
         <button class="btn-add" @click="ishiden = !ishiden">Thêm Mới</button>
       </div>
-      <div class="scroll-list-item">
-        <TodoItemVue v-if="column.id === 1" />
-      </div>
+      <TodoItemVue v-if="column.id === 1" />
+      <CompletedItemVue
+        v-if="column.id === 2 && column.status === 'completed'"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import TodoItemVue from "./components/TodoItem.vue";
+import CompletedItemVue from "./components/CompletedItem.vue";
 import { v4 as idv4 } from "uuid";
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -42,8 +46,15 @@ export default {
       ],
     };
   },
+  props: {
+    type: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   components: {
     TodoItemVue,
+    CompletedItemVue,
   },
   methods: {
     handleSave(e) {
@@ -52,15 +63,15 @@ export default {
         id: idv4(),
         nameTask: this.nameTask,
         createAt: new Date(),
-        status: "",
-      }
-      this.nameTask = ""  //clear input 
-      this.ishiden = false //hiden input when completed add data
-      this.createTodo(newTodo)
+        status: "new",
+      };
+      this.nameTask = ""; //clear input
+      this.ishiden = false; //hiden input when completed add data
+      this.createTodo(newTodo);
     },
     ...mapActions({
-      createTodo: "createTodo"
-    })
+      createTodo: "createTodo",
+    }),
   },
 };
 </script>
@@ -129,30 +140,12 @@ export default {
 }
 .btn-save {
   margin: 10px 0 10px 20px;
-  background-color: #186A3B;
+  background-color: #186a3b;
   border: none;
   width: 7rem;
   padding: 4px 16px;
   border-radius: 3px;
   color: white;
   cursor: pointer;
-}
-.scroll-list-item {
-  overflow: auto;
-  height: 55vh;
-  position: relative;
-  top: 20px;
-} 
-.scroll-list-item::-webkit-scrollbar {
-  width: 3px;
-  height: 10rem;
-}
-.scroll-list-item::-webkit-scrollbar-thumb {
-  background-color: grey;
-  border-radius: 100rem;
-}
-.scroll-list-item::-webkit-scrollbar-track {
-  background-color: white;
-  border-radius: 100rem;
 }
 </style>
