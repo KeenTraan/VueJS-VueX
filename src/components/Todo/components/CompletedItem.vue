@@ -1,7 +1,7 @@
 <template>
   <div class="scroll-completed-item">
     <div v-for="todo in getTodos" :key="todo" class="list-completed">
-      <div class="todo-completed" v-if="todo.status === 'completed'">
+      <div class="completed-todo-list" v-if="todo.status === 'completed'">
         <h4 class="text">
           {{ todo.nameTask }} đã hoàn thành
         </h4>
@@ -46,14 +46,14 @@ export default {
   width: 19vw;
   top: 45px;
 }
-.todo-completed {
+.completed-todo-list {
   background-color: white;
   width: 19vw;
   border-radius: 3px;
   padding: 10px;
   margin-bottom: 10px;
   .text{
-    margin: 10px 0 5px 10px;
+    margin: 10px 0 0 10px;
   }
   .text-completed {
     padding: 10px 0 0 10px;
@@ -62,6 +62,7 @@ export default {
 }
 .scroll-completed-item::-webkit-scrollbar{
   width: 3px;
+  height: 0;
 }
 .scroll-completed-item::-webkit-scrollbar-thumb {
   background-color: grey;
