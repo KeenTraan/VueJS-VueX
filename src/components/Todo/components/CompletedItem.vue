@@ -38,7 +38,7 @@ export default {
 .scroll-completed-item {
   margin-top: 13px;
   position: absolute;
-  left: 10px;
+  left: 7px;
   height: 80vh;
   padding-right: 10px;
   // border: 1px solid red;
@@ -48,7 +48,7 @@ export default {
 }
 .todo-completed {
   background-color: white;
-  width: 18vw;
+  width: 19vw;
   border-radius: 3px;
   padding: 10px;
   margin-bottom: 10px;

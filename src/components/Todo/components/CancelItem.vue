@@ -37,7 +37,7 @@ export default {
   height: 80vh;
   position: absolute;
   width: 19vw;
-  left: 5px;
+  left: 7px;
   top: 60px;
 }
 .cancel-list {
