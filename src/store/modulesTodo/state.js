@@ -2,5 +2,5 @@
 // import { getFormatTime } from "@/utils";
 export default {
   todos: [],
-  ishiden: true,
+  isHiden: true,
 }

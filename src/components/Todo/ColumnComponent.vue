@@ -18,9 +18,7 @@
         <button class="btn-add" @click="ishiden = !ishiden">Thêm Mới</button>
       </div>
       <TodoItemVue v-if="column.id === 1" />
-      <CompletedItemVue
-        v-if="column.id === 2 && column.status === 'completed'"
-      />
+      <CompletedItemVue v-if="column.id === 2" />
     </div>
   </div>
 </template>
@@ -62,7 +60,7 @@ export default {
       const newTodo = {
         id: idv4(),
         nameTask: this.nameTask,
-        createAt: new Date(),
+        createAt: `${this.time} ${this.date}`,
         status: "new",
       };
       this.nameTask = ""; //clear input

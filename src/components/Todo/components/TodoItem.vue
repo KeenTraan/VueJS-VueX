@@ -4,8 +4,7 @@
       <div class="todo-item" v-for="todo in getTodos" :key="todo">
         <h4 style="margin-left: 20px;">{{ todo.nameTask }}</h4>
         <p style="margin-left: 20px;">{{ todo.createAt }}</p>
-        <!-- <p style="margin-left: 20px;">{{ todo.status }}</p> -->
-        <button class="btn-completed" @click="handleCompleted">Hoàn thành</button>
+        <button class="btn-completed" @click="() => handleCompleted(todo.id)">Hoàn thành</button>
         <button class="btn-cancel">Từ bỏ</button>
       </div>
     </div>
@@ -16,16 +15,22 @@
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: "TodoItemComponent",
+  data() {
+    return {
+      
+    }
+  },
   methods: {
-    handleCompleted() {
-      const a = [...this.getTodos]
-      console.log(a);
+    handleCompleted(id) {
+      this.updateStatus(id)
     },
   ...mapActions({
     updateStatus: "updateStatus"
   })
   },
-  computed: mapGetters(['getTodos'])
+  computed: {
+    ...mapGetters(['getTodos', 'getOneTodo']),
+} 
 };
 </script>
 

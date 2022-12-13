@@ -55,12 +55,12 @@ export default {
     padding: 15px;
     font-size: large;
     &.router-link-exact-active {
-      color: rgb(0, 41, 155);
+      color: rgb(0, 177, 171);
     }
   }
   .router-link:hover {
     background-color: lightblue;
-    transition: 0.6s;
+    transition: 0.8s;
   }
 }
 </style>

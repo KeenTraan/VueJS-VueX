@@ -1,10 +1,10 @@
 <template>
-  <div v-for="todos in getTodos" :key="todos">
-    <div>
+  <div v-for="todo in getTodos" :key="todo">
+    <div v-if="todo.status === 'completed'">
       <h4>
-        {{todos.nameTask}}
+        {{todo.nameTask}}
       </h4>
-      <p>{{todos.status}}</p>
+      <!-- <p>{{todos.status}}</p> -->
     </div>
   </div>
 </template>
@@ -12,7 +12,9 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  computed: mapGetters(['getTodos'])
+  computed: {
+    ...mapGetters(['getTodos'])
+  }
 }
 </script>
 
