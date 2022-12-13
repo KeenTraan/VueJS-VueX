@@ -82,6 +82,7 @@ export default {
   display: flex;
 }
 .column {
+  position: relative;
   background-color: #dcdcdc;
   margin-right: 20px;
   width: 20vw;
