@@ -1,11 +1,13 @@
 <template>
   <div class="scroll-list-item">
     <div class="todo-list">
-      <div class="todo-item" v-for="todo in getTodos" :key="todo">
-        <h4 style="margin-left: 20px;">{{ todo.nameTask }}</h4>
-        <p style="margin-left: 20px;">{{ todo.createAt }}</p>
-        <button class="btn-completed" @click="() => handleCompleted(todo.id)">Hoàn thành</button>
-        <button class="btn-cancel">Từ bỏ</button>
+      <div  v-for="todo in getTodos" :key="todo">
+        <div class="todo-item" v-if="todo.status === 'new'">
+          <h4 class="text">{{ todo.nameTask }}</h4>
+          <p class="text">{{ todo.createAt }}</p>
+          <button class="btn-completed" @click="handleCompleted(todo)">Hoàn thành</button>
+          <button class="btn-cancel" @click="handleCancel(todo)">Từ bỏ</button>
+        </div>
       </div>
     </div>
   </div>
@@ -15,21 +17,19 @@
 import { mapActions, mapGetters } from 'vuex';
 export default {
   name: "TodoItemComponent",
-  data() {
-    return {
-      
-    }
-  },
   methods: {
-    handleCompleted(id) {
-      this.updateStatus(id)
+    handleCompleted(todo) {
+      todo.status = "completed"
+    },
+    handleCancel(todo) {
+      todo.status = "cancel"
     },
   ...mapActions({
     updateStatus: "updateStatus"
   })
   },
   computed: {
-    ...mapGetters(['getTodos', 'getOneTodo']),
+    ...mapGetters(['getTodos']), //khoi tao state khi component được mount
 } 
 };
 </script>
@@ -37,9 +37,12 @@ export default {
 <style lang="scss" scoped>
 .todo-item {
   background-color: white;
-  margin: 5px 10px 0 11px;
-  padding: 5px;
+  margin: 10px 10px 20px 12px;
+  padding: 20px 0 25px 0;
   border-radius: 3px;
+  .text{
+    margin:0 0 10px 20px
+  }
 }
 .btn-completed {
   background-color: #186A3B;
@@ -67,7 +70,6 @@ export default {
 } 
 .scroll-list-item::-webkit-scrollbar {
   width: 3px;
-  height: 10rem;
 }
 .scroll-list-item::-webkit-scrollbar-thumb {
   background-color: grey;

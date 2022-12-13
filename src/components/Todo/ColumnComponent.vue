@@ -19,15 +19,17 @@
       </div>
       <TodoItemVue v-if="column.id === 1" />
       <CompletedItemVue v-if="column.id === 2" />
+      <CancelItemVue v-if="column.id === 3"/>
     </div>
   </div>
 </template>
 
 <script>
-import TodoItemVue from "./components/TodoItem.vue";
-import CompletedItemVue from "./components/CompletedItem.vue";
+import TodoItemVue from "@/components/Todo/components/TodoItem.vue";
+import CompletedItemVue from "@/components/Todo/components/CompletedItem.vue";
 import { v4 as idv4 } from "uuid";
 import { mapActions } from "vuex";
+import CancelItemVue from './components/CancelItem.vue';
 export default {
   data() {
     return {
@@ -53,6 +55,7 @@ export default {
   components: {
     TodoItemVue,
     CompletedItemVue,
+    CancelItemVue
   },
   methods: {
     handleSave(e) {
@@ -115,10 +118,11 @@ export default {
   position: relative;
   left: 0.7rem;
   top: 1rem;
+  margin-top: 15px;
   border-radius: 3px;
   input {
     width: 16vw;
-    margin: 20px 0 0 20px;
+    margin: 20px 0 15px 20px;
     border: 1px solid rgba(65, 65, 65, 0.8);
     border-radius: 3px;
     padding: 5px;
