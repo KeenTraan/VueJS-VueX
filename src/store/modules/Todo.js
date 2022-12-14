@@ -33,7 +33,6 @@ const ModuleTodos = {
         payload,
         ...todo.slice(index + 1)
       ]
-      console.log(store.state.todo = todo);
       return store.state.todos = todo
     }
   }
