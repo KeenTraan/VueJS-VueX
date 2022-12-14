@@ -36,7 +36,7 @@ export default {
 .todo-item {
   background-color: white;
   margin: 0 10px 20px 12px;
-  padding: 20px 0 25px 0;
+  padding: 15px 0 20px 0;
   border-radius: 3px;
   .text{
     margin:0 0 10px 20px
@@ -46,7 +46,7 @@ export default {
   background-color: #186A3B;
   border: none;
   border-radius: 3px;
-  padding: 4px 10px 4px 10px;
+  padding: 4px 10px;
   margin: 6px 12px 0 16px;
   color: white;
   cursor: pointer;
@@ -55,7 +55,7 @@ export default {
   background-color: red;
   border: none;
   border-radius: 3px;
-  padding: 4px 10px 4px 10px;
+  padding: 4px 10px;
   color: white;
   cursor: pointer;
   width: 6rem;

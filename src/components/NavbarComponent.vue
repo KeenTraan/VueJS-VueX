@@ -1,6 +1,6 @@
 <template>
   <div class="nav-bar">
-    <h2 class="logo">Example Basic</h2>
+    <h2 class="logo">Basic Exercise</h2>
     <nav class="nav-list">
       <router-link
         v-for="link in navlinks"
