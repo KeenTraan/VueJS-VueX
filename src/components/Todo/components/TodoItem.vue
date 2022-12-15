@@ -1,82 +1,93 @@
 <template>
-  <div class="scroll-list-item">
-    <div class="todo-list">
-      <div  v-for="todo in getTodos" :key="todo">
-        <div class="todo-item" v-if="todo.status === 'new'">
-          <h4 class="text">{{ todo.nameTask }}</h4>
-          <p class="text">{{ todo.createAt }}</p>
-          <button class="btn-completed" @click="handleUpadteStatus(todo, 'completed')">Hoàn thành</button>  <!-- truyền data ban đầu cùng status xuống -->
-          <button class="btn-cancel" @click="handleUpadteStatus(todo, 'cancel')">Từ bỏ</button>
-        </div>
-      </div>
+  <div v-if="!addModel" class="TodoItem">
+    <div class="input-form">
+      <form @submit.prevent="onSubmit(nameTask)">
+        <input type="text" placeholder="Nhập tên nhiệm vụ" v-model="nameTask" />
+        <p style="margin-left: 10px">{{this.currentTime}}</p>
+        <button class="btn-save" type="submit">Lưu</button>
+        <button class="btn-cancel" @click="onCancel">
+          Hủy Bỏ
+        </button>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { getFormatTime } from "@/utils";
 export default {
-  name: "TodoItemComponent",
-  methods: {
-    handleUpadteStatus(todo, status) {
-      const newTodo = {...todo, status} // coppy dữ liệu sang một object mới 
-     this.updateStatus(newTodo) // đẩy dữ liệu được coppy qua acction function để xử lý
+  name: "TodoItem",
+  data() {
+    return {
+      nameTask: "",
+    };
+  },
+  props: {
+    todo: {
+      type: Array,
+      default: () => [],
     },
-  ...mapActions({
-    updateStatus: "updateStatus"
-  })
+    addModel: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+  methods: {
+    onSubmit(nameTask) {
+      this.$emit("onSubmit", { nameTask, createAt: this.currentTime});
+      this.nameTask = "";
+    },
+    onCancel() {
+      this.$emit("onCancel");
+    },
   },
   computed: {
-    ...mapGetters(['getTodos']), //khoi tao state khi component được mount
-} 
+    currentTime() {
+      let dateTime = new Date();
+      return getFormatTime(dateTime);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.todo-item {
-  background-color: white;
-  margin: 0 10px 20px 12px;
-  padding: 15px 0 20px 0;
-  border-radius: 3px;
-  .text{
-    margin:0 0 10px 20px
-  }
-}
-.btn-completed {
-  background-color: #186A3B;
-  border: none;
-  border-radius: 3px;
-  padding: 4px 10px;
-  margin: 6px 12px 0 16px;
-  color: white;
-  cursor: pointer;
-}
-.btn-cancel {
-  background-color: red;
-  border: none;
-  border-radius: 3px;
-  padding: 4px 10px;
-  color: white;
-  cursor: pointer;
-  width: 6rem;
-}
-.scroll-list-item {
-  overflow: auto;
-  height: 50vh;
+.TodoItem {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  top: 30px;
-  width: 20vw; 
-  // border: 1px solid red;
-} 
-.scroll-list-item::-webkit-scrollbar {
-  width: 3px;
-}
-.scroll-list-item::-webkit-scrollbar-thumb {
-  background-color: grey;
-  border-radius: 100rem;
-}
-.scroll-list-item::-webkit-scrollbar-track {
+  top: 10px;
+  width: calc(100% - 10px);
+  height: calc(100px - 10px);
+  border-radius: 5px;
   background-color: white;
-  border-radius: 100rem;
+  border-radius: 3px;
+  left: 5px;
+  .input-form {
+    position: absolute;
+    width: 100%;
+    input {
+      width: 90%;
+      margin: 10px 0 10px 10px;
+      opacity: 0.5;
+    }
+    .btn-save {
+      cursor: pointer;
+      margin: 0 10px 0 10px;
+      background-color: green;
+      border: none;
+      color: white;
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+    .btn-cancel {
+      cursor: pointer;
+      color: white;
+      margin: 0 10px;
+      background-color: red;
+      border: none;
+      border-radius: 3px;
+      padding: 4px 8px;
+    }
+  }
 }
 </style>

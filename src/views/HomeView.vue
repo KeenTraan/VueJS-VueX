@@ -6,17 +6,16 @@
 </template>
 
 <script>
-import NavbarComponent from '@/components/NavbarComponent.vue'
+import NavbarComponent from "@/components/NavbarComponent.vue";
 
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   components: {
-    NavbarComponent
-  }
-}
+    NavbarComponent,
+  },
+};
 </script>
 <style lang="scss" scoped>
-
 .home {
   display: flex;
 }

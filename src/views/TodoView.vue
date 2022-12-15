@@ -3,19 +3,19 @@
     <NavbarComponent />
     <div class="body-todo">
       <SearchTodoVue />
-      <ColumnComponent />
+      <TodoApp />
     </div>
   </div>
 </template>
 
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue'
-import ColumnComponent from '@/components/Todo/ColumnComponent.vue'
+import TodoApp from '@/components/Todo/TodoApp.vue'
 import SearchTodoVue from '@/components/Todo/SearchTodo.vue'
 export default {
   components: {
     NavbarComponent,
-    ColumnComponent,
+    TodoApp,
     SearchTodoVue
   }
 }

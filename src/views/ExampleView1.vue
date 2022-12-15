@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.example{
+.example {
   display: flex;
 }
 </style>
