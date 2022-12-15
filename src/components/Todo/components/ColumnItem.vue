@@ -1,16 +1,16 @@
 <template>
-  <div class="columnItem">
+  <div class="column-item">
     <h3 class="header-column">{{ columnTitle }}</h3>
     <div class="list">
+      <AddToDoForm
+        v-if="columnItem.status === 'new' && showingAddForm"
+        @cancelAddingToDo="showingAddForm = false"
+      />
       <div class="list-item">
-        <TodoItem
-          v-if="columnItem.status == 'new'"
-          @onSubmit="onSubmit($event)"
-          @onCancel="onCancel"
-        />
+        <TodoItem v-if="columnItem.status === 'new'" />
       </div>
-      <div class="cover" v-if="columnItem.status == 'new'">
-        <button class="btn-add">Add New</button>
+      <div class="cover" v-if="columnItem.status === 'new'">
+        <button class="btn-add" @click="showingAddForm = true">Add New</button>
       </div>
     </div>
   </div>
@@ -18,8 +18,14 @@
 
 <script>
 import TodoItem from "@/components/Todo/components/TodoItem.vue";
+import AddToDoForm from "@/components/Todo/components/AddToDoForm.vue";
 import { mapGetters } from "vuex";
 export default {
+  name: "ColumnItem",
+  components: {
+    TodoItem,
+    AddToDoForm,
+  },
   props: {
     columnTitle: {
       type: String,
@@ -34,6 +40,11 @@ export default {
       default: () => ({}),
     },
   },
+  data() {
+    return {
+      showingAddForm: false,
+    };
+  },
   methods: {
     onSubmit(e) {
       console.log(e);
@@ -42,9 +53,6 @@ export default {
       console.log("Cancel!");
     },
   },
-  components: {
-    TodoItem,
-  },
   computed: {
     ...mapGetters(["getShowInput"]),
   },
@@ -52,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.columnItem {
+.column-item {
   position: relative;
   width: 20vw;
   .header-column {

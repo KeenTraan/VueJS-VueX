@@ -23,30 +23,19 @@ const ModuleTodos = {
         status: "cancel",
       },
     ],
-    showAddModel: {
-      isHiden: false,
-    },
   },
   getters: {
     getTodos(state) {
       return state.todos;
-    },
-    getShowInput(state) {
-      return state.showAddModel.isHiden;
     },
   },
   mutations: {
     setTodo(state, payload) {
       state.todos = payload;
     },
-    setShowAddModel(state) {
-      state.showAddModel.isHiden = !state.showAddModel.isHiden;
-    },
   },
   actions: {
-    showAddModel({ commit }) {
-      commit("setShowAddModel");
-    },
+
     createTodo(state, todos) {
       const Todo = [...state.getters.getTodos, todos];
       state.commit("setTodo", Todo);
