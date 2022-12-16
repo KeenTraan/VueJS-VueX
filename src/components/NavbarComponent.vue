@@ -33,12 +33,12 @@ export default {
 <style scoped lang="scss">
 .nav-bar {
   height: 100vh;
-  width: 15vw;
+  width: 15%;
   background-color: #dcdcdc;
   margin-right: 5rem;
   position: relative;
   .logo {
-    margin: 1rem;
+    margin: 20px;
     position: absolute;
   }
 }
