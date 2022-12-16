@@ -13,14 +13,15 @@
 
 <script>
 import ColumnItem from "@/components/Todo/components/ColumnItem.vue";
+import { STATUS } from "@/constant";
 export default {
   name: "TodoApp",
   data() {
     return {
       columns: [
-        { id: 1, columnTitle: "New", status: "new" },
-        { id: 2, columnTitle: "Completed", status: "complete" },
-        { id: 3, columnTitle: "Canceled", status: "cancel" },
+        { id: 1, columnTitle: "New", status: STATUS.NEW },
+        { id: 2, columnTitle: "Completed", status: STATUS.COMPLETED },
+        { id: 3, columnTitle: "Canceled", status: STATUS.CANCELED },
       ],
     };
   },
@@ -37,7 +38,7 @@ export default {
 .columnItem {
   width: 20vw;
   height: 90vh;
-  background-color: rgb(184, 184, 184);
+  background-color: rgb(224, 224, 224);
   margin-right: 10px;
 }
 </style>

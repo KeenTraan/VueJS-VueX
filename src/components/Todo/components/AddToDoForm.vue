@@ -4,8 +4,8 @@
       <form @submit.prevent="handleSubmit">
         <input type="text" placeholder="Nhập tên nhiệm vụ" v-model="name" />
         <p style="margin-left: 10px">{{ this.currentTime }}</p>
-        <button class="btn-save" type="submit" :disabled="this.name === ''">Lưu</button>
-        <button class="btn-cancel" type="button" @click="cancel">Hủy Bỏ</button>
+        <button class="btn-save" type="submit" :disabled="this.name === ''">Save</button>
+        <button class="btn-cancel" type="button" @click="cancel">Cancel</button>
       </form>
     </div>
   </div>
@@ -13,11 +13,16 @@
 
 <script>
 import { mapActions } from "vuex";
+import { getFormatTime } from "@/utils"
+import { v4 as idv4 } from "uuid";
+import { STATUS } from "@/constant";
 export default {
   name: "AddToDoForm",
   data() {
     return {
       name: "",
+      currentTime: getFormatTime(new Date()),
+      STATUS
     };
   },
   methods: {
@@ -26,14 +31,14 @@ export default {
     },
     handleSubmit() {
       const addTodo = {
+        id: idv4(),
         nameTask: this.name,
-        createAt: `${new Date().getHours()}:${new Date().getMinutes()} ${new Date().getDate()}/${
-          new Date().getMonth() + 1
-        }/${new Date().getFullYear()}`,
-        status: "new",
+        createAt: this.currentTime,
+        status: STATUS.NEW,
       };
       this.createTodo(addTodo);
       this.name = ""
+      this.$emit("hiddenTodo")
     },
     ...mapActions({ createTodo: "createTodo" }),
   },
@@ -42,6 +47,8 @@ export default {
 
 <style lang="scss">
 .to-do-item {
+  position: relative;
+  top: 5px;
   .input-form {
     position: relative;
     height: calc(100px - 10px);
@@ -52,6 +59,7 @@ export default {
     top: 10px;
     input {
       width: 90%;
+      border-radius: 3px;
       margin: 10px 0 10px 10px;
       opacity: 0.5;
     }

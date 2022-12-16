@@ -1,5 +1,6 @@
 import { getFormatTime } from "@/utils";
 import { v4 as idv4 } from "uuid";
+import { STATUS } from "@/constant";
 const ModuleTodos = {
   name: "ModuleTodos",
   state: {
@@ -8,19 +9,19 @@ const ModuleTodos = {
         id: idv4(),
         nameTask: "Mission 1",
         createAt: getFormatTime(new Date()),
-        status: "new",
+        status: STATUS.NEW,
       },
       {
         id: idv4(),
         nameTask: "Mission 2",
         createAt: getFormatTime(new Date()),
-        status: "completed",
+        status: STATUS.COMPLETED,
       },
       {
         id: idv4(),
         nameTask: "Mission 3",
         createAt: getFormatTime(new Date()),
-        status: "cancel",
+        status: STATUS.CANCELED,
       },
     ],
   },
@@ -35,7 +36,6 @@ const ModuleTodos = {
     },
   },
   actions: {
-
     createTodo(state, todos) {
       const Todo = [...state.getters.getTodos, todos];
       state.commit("setTodo", Todo);

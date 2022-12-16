@@ -1,13 +1,14 @@
 <template>
   <div class="search">
     <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" />
-    <button class="btn">Tìm kiếm</button>
-  </div>
+    <button class="btn">Search</button>
+  </div>  
 </template>
 
 <script>
 export default {
   name: "SearchTodoView",
+  
 };
 </script>
 

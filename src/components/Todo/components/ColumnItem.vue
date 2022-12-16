@@ -3,13 +3,16 @@
     <h3 class="header-column">{{ columnTitle }}</h3>
     <div class="list">
       <AddToDoForm
-        v-if="columnItem.status === 'new' && showingAddForm"
-        @cancelAddingToDo="showingAddForm = false"
+        v-if="columnItem.status === STATUS.NEW && showingAddForm"
+        @cancelAddingToDo="hiddenTodo"
+        @hiddenTodo="hiddenTodo"
       />
       <div class="list-item">
-        <TodoItem v-if="columnItem.status === 'new'" />
+        <TodoItem 
+        :columnStatus="columnItem.status"
+        />
       </div>
-      <div class="cover" v-if="columnItem.status === 'new'">
+      <div class="cover" v-if="columnItem.status === STATUS.NEW">
         <button class="btn-add" @click="showingAddForm = true">Add New</button>
       </div>
     </div>
@@ -19,7 +22,7 @@
 <script>
 import TodoItem from "@/components/Todo/components/TodoItem.vue";
 import AddToDoForm from "@/components/Todo/components/AddToDoForm.vue";
-import { mapGetters } from "vuex";
+import { STATUS } from "@/constant";
 export default {
   name: "ColumnItem",
   components: {
@@ -31,7 +34,7 @@ export default {
       type: String,
       default: () => "",
     },
-    todos: {
+    todo: {
       type: Array,
       default: () => [],
     },
@@ -43,18 +46,16 @@ export default {
   data() {
     return {
       showingAddForm: false,
+      STATUS
     };
   },
   methods: {
-    onSubmit(e) {
-      console.log(e);
-    },
-    onCancel() {
-      console.log("Cancel!");
-    },
+    hiddenTodo() {
+      this.showingAddForm = false;
+    }
   },
   computed: {
-    ...mapGetters(["getShowInput"]),
+
   },
 };
 </script>
@@ -69,12 +70,12 @@ export default {
   }
   .list {
     // border: 1px solid red;
+    overflow: auto;
     height: 80vh;
     width: 20vw;
   }
   .list-item {
-    display: flex;
-    flex-direction: column;
+    position: relative;
   }
   .cover {
     position: absolute;
@@ -93,5 +94,16 @@ export default {
       color: white;
     }
   }
+}
+.list::-webkit-scrollbar {
+  width: 3px
+}
+.list::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 100rem; 
+}
+.list::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 100rem;
 }
 </style>
