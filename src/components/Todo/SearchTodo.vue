@@ -1,14 +1,18 @@
 <template>
   <div class="search">
-    <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" />
-    <button class="btn">Search</button>
+    <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" v-model="keywork"/>
+    <button class="btn-search">Search</button>
   </div>  
 </template>
 
 <script>
 export default {
   name: "SearchTodoView",
-  
+  data() {
+    return {
+      keywork: ""
+    };
+  }
 };
 </script>
 
@@ -23,10 +27,10 @@ export default {
     border-radius: 3px;
     opacity: 0.5;
   }
-  .btn {
+  .btn-search {
     background-color: green;
     border: none;
-    padding: 7px;
+    padding: 6px 20px;
     border-radius: 3px;
     cursor: pointer;
     color: white;
