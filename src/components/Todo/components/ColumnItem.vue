@@ -1,7 +1,7 @@
 <template>
   <div class="column-item">
     <h3 class="header-column">{{ columnTitle }}</h3>
-    <div class="list">
+    <div>
       <div class="list-item">
         <AddToDoForm
           v-if="columnItem.status === STATUS.NEW && showingAddForm"
@@ -49,6 +49,10 @@ export default {
       type: String,
       default: () => "",
     },
+    keyword: {
+      type: String,
+      default: () => "",
+    }
   },
   data() {
     return {
@@ -60,11 +64,12 @@ export default {
     hiddenTodo() {
       this.showingAddForm = false;
     },
+
   },
   computed: {
     ...mapGetters(["getTodos"]),
     todoList() {
-      return this.$store.getters.getTodos.filter(todo => todo.status === this.status);
+      return this.$store.getters.getTodos.filter(todo => todo.status === this.status && todo.nameTask.includes(this.keyword));
     }
   },
 };
@@ -81,7 +86,6 @@ export default {
     width: 20vw;
     background-color: white;
   }
-
   .list-item {
     overflow: auto;
     height: calc(100vh - 20vh);
@@ -90,7 +94,6 @@ export default {
     gap: 10px;
     flex-direction: column;
   }
-  
   .cover {
     bottom: 10px;
     position: absolute;

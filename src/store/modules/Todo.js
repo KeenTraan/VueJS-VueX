@@ -2,7 +2,7 @@ import { getFormatTime } from "@/utils";
 import { v4 as idv4 } from "uuid";
 import { STATUS } from "@/constant";
 const ModuleTodos = {
-  name: "ModuleTodos",
+  name: "Todos",
   state: {
     todos: [
       {

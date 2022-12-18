@@ -7,6 +7,7 @@
       :columnTitle="column.columnTitle"
       :status="column.status"
       :columnItem="column"
+      :keyword="keyword"
     />
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
         { id: 2, columnTitle: "Completed", status: STATUS.COMPLETED },
         { id: 3, columnTitle: "Canceled", status: STATUS.CANCELED },
       ],
+      keyword: ""
     };
   },
   components: {
@@ -31,8 +33,9 @@ export default {
     SearchTodo
   },
   methods: {
-    searchTodo(keywork) {
-      console.log(keywork)
+    searchTodo(keyword) {
+      this.keyword = keyword;
+      // console.log( this.keyword = keyword);
     }
   }
 };

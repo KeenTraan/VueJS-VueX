@@ -1,7 +1,7 @@
 <template>
   <div class="search">
-    <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" v-model="keywork"/>
-    <button class="btn-search" @click="searchTodos($event)">Search</button>
+    <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" v-model="keyword"/>
+    <button class="btn-search" @click="searchTodos">Search</button>
   </div>  
 </template>
 
@@ -11,12 +11,12 @@ export default {
   name: "SearchTodoView",
   data() {
     return {
-      keywork: ""
+      keyword: ""
     };
   },
   methods: {
     searchTodos() {
-      this.$emit("search", this.keywork)
+      this.$emit("search", this.keyword)
     }
 },
 computed: {
