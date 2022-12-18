@@ -1,5 +1,5 @@
 <template>
-  <SearchTodo @search="searchTodo"/>
+  <SearchTodo @handleSearch="searchTodo"/>
   <div class="todoItem">
     <ColumnItem
       v-for="column in columns"
@@ -16,6 +16,7 @@
 import ColumnItem from "@/components/Todo/components/ColumnItem.vue";
 import SearchTodo from "@/components/Todo/components/SearchTodo.vue";
 import { STATUS } from "@/constant";
+
 export default {
   name: "TodoApp",
   data() {
@@ -35,7 +36,6 @@ export default {
   methods: {
     searchTodo(keyword) {
       this.keyword = keyword;
-      // console.log( this.keyword = keyword);
     }
   }
 };

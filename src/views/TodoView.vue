@@ -16,7 +16,6 @@ export default {
   components: {
     NavbarComponent,
     TodoApp,
-    // SearchTodoVue
   }
 }
 </script>

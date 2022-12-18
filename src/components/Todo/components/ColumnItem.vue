@@ -69,7 +69,7 @@ export default {
   computed: {
     ...mapGetters(["getTodos"]),
     todoList() {
-      return this.$store.getters.getTodos.filter(todo => todo.status === this.status && todo.nameTask.includes(this.keyword));
+      return this.$store.getters.getTodos.filter(todo => todo.status === this.status && todo.nameTask.toLowerCase().includes(this.keyword.toLowerCase()));
     }
   },
 };

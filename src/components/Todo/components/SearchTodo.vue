@@ -1,8 +1,8 @@
 <template>
-  <div class="search">
+  <form class="search" @submit.prevent="searchTodos">
     <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" v-model="keyword"/>
-    <button class="btn-search" @click="searchTodos">Search</button>
-  </div>  
+    <button class="btn-search" type="submit">Search</button>
+  </form>  
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     searchTodos() {
-      this.$emit("search", this.keyword)
+      this.$emit("handleSearch", this.keyword)
     }
 },
 computed: {

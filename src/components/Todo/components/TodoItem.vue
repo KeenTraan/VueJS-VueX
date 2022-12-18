@@ -47,7 +47,6 @@ export default {
   methods: {
     handleUpdate(todo, status) {
       const updateTodo = { ...todo, status };
-      console.log(this.updateStatus(updateTodo));
       this.updateStatus(updateTodo);
       this.currentTime
     },
