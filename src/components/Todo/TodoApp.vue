@@ -1,4 +1,5 @@
 <template>
+  <SearchTodo @search="searchTodo"/>
   <div class="todoItem">
     <ColumnItem
       v-for="column in columns"
@@ -6,13 +7,13 @@
       :columnTitle="column.columnTitle"
       :status="column.status"
       :columnItem="column"
-      class="columnItem"
     />
   </div>
 </template>
 
 <script>
 import ColumnItem from "@/components/Todo/components/ColumnItem.vue";
+import SearchTodo from "@/components/Todo/components/SearchTodo.vue";
 import { STATUS } from "@/constant";
 export default {
   name: "TodoApp",
@@ -27,7 +28,13 @@ export default {
   },
   components: {
     ColumnItem,
+    SearchTodo
   },
+  methods: {
+    searchTodo(keywork) {
+      console.log(keywork)
+    }
+  }
 };
 </script>
 
@@ -35,10 +42,5 @@ export default {
 .todoItem {
   display: flex;
 }
-.columnItem {
-  width: 20vw;
-  height: 90vh;
-  background-color: rgb(224, 224, 224);
-  margin-right: 10px;
-}
+
 </style>

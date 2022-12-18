@@ -2,7 +2,7 @@
   <div class="todo">
     <NavbarComponent />
     <div class="body-todo">
-      <SearchTodoVue />
+      <!-- <SearchTodoVue /> -->
       <TodoApp />
     </div>
   </div>
@@ -11,12 +11,12 @@
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import TodoApp from '@/components/Todo/TodoApp.vue'
-import SearchTodoVue from '@/components/Todo/SearchTodo.vue'
+// import SearchTodoVue from '@/components/Todo/SearchTodo.vue'
 export default {
   components: {
     NavbarComponent,
     TodoApp,
-    SearchTodoVue
+    // SearchTodoVue
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="to-do-item" v-for="todo in getTodos" :key="todo.id">
-    <div class="to-do-list" v-if="todo.status === columnStatus">
+  <div>
+    <div class="to-do-item">
       <h4>{{ todo.nameTask }}</h4>
       <p class="to-do-time">{{ todo.createAt }}</p>
       <div v-if="todo.status === STATUS.NEW">
@@ -11,13 +11,13 @@
           Destroy
         </button>
       </div>
-      <div v-else-if="todo.status === STATUS.COMPLETED">
-        <p>Hoàn thành lúc:</p>
-        <p>{{currentTime}}</p>
+      <div v-if="todo.status === STATUS.COMPLETED">
+        <p class="notify-complete">Hoàn thành lúc:</p>
+        <p class="notify-complete">{{currentTime}}</p>
       </div>
-      <div v-else>
-        <p>Hủy bỏ lúc: </p>
-        <p>{{currentTime}}</p>
+      <div v-if="todo.status === STATUS.CANCELED">
+        <p class="notify-destroy">Hủy bỏ lúc: </p>
+        <p class="notify-destroy">{{currentTime}}</p>
       </div>
     </div>
   </div>
@@ -31,44 +31,52 @@ export default {
   name: "TodoItem",
   data() {
     return{
-      currentTime: getFormatTime(new Date()), 
       STATUS
     }
   },
   props: {
-    todo: {
-      type: Object,
-      default: () => ({}),
-    },
     columnStatus: {
       type: String,
       default: () => "",
     },
+    todo: {
+      type: Object,
+      default: () => ({}),
+    }
   },
   methods: {
     handleUpdate(todo, status) {
       const updateTodo = { ...todo, status };
       console.log(this.updateStatus(updateTodo));
       this.updateStatus(updateTodo);
+      this.currentTime
     },
     ...mapActions(["updateStatus"]),
   },
   computed: {
-    ...mapGetters(["getTodos"]),
+    ...mapGetters(['getTodos']),
+    currentTime(){
+      let currentTime = new Date()
+      return getFormatTime(currentTime)
+    }  
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.to-do-item {
-  // position: relative;
-  .to-do-list {
+
+  .to-do-item {
     background-color: white;
-    margin: 20px 10px;
     border-radius: 5px;
     padding: 10px;
     .to-do-time {
       margin-bottom: 10px;
+    }
+    .notify-complete {
+      color: green;
+    }
+    .notify-destroy {
+      color: red;
     }
   }
   .btn-completed {
@@ -88,5 +96,5 @@ export default {
     color: white;
     cursor: pointer;
   }
-}
+
 </style>

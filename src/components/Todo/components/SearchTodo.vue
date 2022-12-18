@@ -1,18 +1,27 @@
 <template>
   <div class="search">
     <input type="search" placeholder="Nhập từ khóa để tìm kiếm nhiệm vụ" v-model="keywork"/>
-    <button class="btn-search">Search</button>
+    <button class="btn-search" @click="searchTodos($event)">Search</button>
   </div>  
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "SearchTodoView",
   data() {
     return {
       keywork: ""
     };
-  }
+  },
+  methods: {
+    searchTodos() {
+      this.$emit("search", this.keywork)
+    }
+},
+computed: {
+  ...mapGetters(['getTodos'])
+}
 };
 </script>
 
