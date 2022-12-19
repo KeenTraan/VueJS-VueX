@@ -1,29 +1,7 @@
-import { getFormatTime } from "@/utils";
-import { v4 as idv4 } from "uuid";
-import { STATUS } from "@/constant";
 const ModuleTodos = {
-  name: "Todos",
+  name: "Todo",
   state: {
-    todos: [
-      {
-        id: idv4(),
-        nameTask: "Mission 1",
-        createAt: getFormatTime(new Date()),
-        status: STATUS.NEW,
-      },
-      {
-        id: idv4(),
-        nameTask: "Mission 2",
-        createAt: getFormatTime(new Date()),
-        status: STATUS.COMPLETED,
-      },
-      {
-        id: idv4(),
-        nameTask: "Mission 3",
-        createAt: getFormatTime(new Date()),
-        status: STATUS.CANCELED,
-      },
-    ],
+    todos: [],
   },
   getters: {
     getTodos(state) {
