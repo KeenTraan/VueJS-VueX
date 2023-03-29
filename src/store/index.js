@@ -1,20 +1,11 @@
-import { createStore } from 'vuex'
-
+import { createStore } from "vuex";
+import Todo  from "@/store/modules/Todo";
 export default createStore({
-  state: {
-    navlink: [
-      {name: "Home", path: '/'},
-      {name: "Todo", path: '/todo'},
-      {name: "Example 1", path: '/example1'},
-      {name: "Example 2", path: '/example2'}
-    ]
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
   modules: {
-  }
-})
+    Todo,
+  },
+});

@@ -1,22 +1,21 @@
 <template>
-  <div class="home">
+  <div class="example">
     <NavbarComponent />
-    <h1>Home page</h1>
+    <h1>Exam 1</h1>
   </div>
 </template>
 
 <script>
 import NavbarComponent from "@/components/NavbarComponent.vue";
-
 export default {
-  name: "HomeView",
   components: {
     NavbarComponent,
   },
 };
 </script>
+
 <style lang="scss" scoped>
-.home {
+.example {
   display: flex;
 }
 </style>
